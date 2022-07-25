@@ -31,23 +31,26 @@ from flask import jsonify
 from flask import Response, Flask
 from flask import make_response, request, current_app, render_template
 import uuid
-
+import os
 app = Flask(__name__)
 app.secret_key = "weeeeeeeeee"
-
+@app.route("/list", methods=["GET"])
+def list_results():
+    return jsonify({'results': os.listdir('./images_out')})
 @app.route("/portrait", methods=["POST"])
-def portraite():
+def portrait():
     pargs.diffusion_model = "portrait_generator_v001"
     pargs.use_secondary_model = False
     pargs.batch_name = "portrait-" + str(uuid.uuid1())
     pargs.n_batches = 1
-    pargs.text_prompts ={0: ["{}1.5".format(request.args['description']),
+    pargs.steps = 50
+    pargs.text_prompts ={0: ["{}:1.5".format(request.args['description']),
          "style of Julia Condon",
          "artstation,deviantart,vray render, unreal engine, hyperrealism, photorealism,volumetric lighting:.3"]}
 
     dd.start_run(pargs=pargs, folders=folders, device=device, is_colab=dd.detectColab())
     print(pargs.batch_name)
-    return jsonify(pargs.batch_name)
+    return jsonify({'batch': pargs.batch_name})
 
 if __name__=="__main__":
-    app.run(host='0.0.0.0', debug=True, use_reloader=True)
+    app.run(host='0.0.0.0',port=8080, debug=True, use_reloader=True)
