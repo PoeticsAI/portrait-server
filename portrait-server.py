@@ -30,7 +30,7 @@ pargs = dd_args.arg_configuration_loader()
 device = dd.getDevice(pargs)
 import uuid
 import os
-
+from loguru import logger
 if __name__=="__main__":
  
     folders = pydot(
@@ -49,12 +49,12 @@ if __name__=="__main__":
     for f in os.listdir(input_dir):
         data = json.load(os.path.join(input_dir, f))
         batch_name = f.replace('.json','')
-        print("processing", batch_name)
-        print(data)
+        logger.info("processing", batch_name)
+        logger.info(data)
         folders.batch_path  = os.path.join(input_path, batch_name)
         pargs.text_prompts ={0: ["{}:1.5".format(data['description']),
          "artstation,deviantart,vray render, unreal engine, hyperrealism, photorealism,volumetric lighting:.3"] + ['style of {}'.format(a) for a in data['artists']]}
-
+   
         dd.start_run(pargs=pargs, folders=folders, device=device, is_colab=dd.detectColab())
-
+        logger.info(os.listdir(os.getcwd()))
 
