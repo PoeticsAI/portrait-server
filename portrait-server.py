@@ -45,7 +45,7 @@ if __name__=="__main__":
     pargs.use_secondary_model = False
     pargs.n_batches = 1
     pargs.steps = 50
-    input_dir = '/inputs/dd-input'# sys.argv[1]
+    input_dir = '/inputs/dd-input/data'# sys.argv[1]
     for f in os.listdir(input_dir):
         data = json.load(os.path.join(input_dir, f))
         batch_name = f.replace('json','')
