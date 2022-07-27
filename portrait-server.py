@@ -48,7 +48,9 @@ if __name__=="__main__":
     input_dir = '/outputs/dd-input'# sys.argv[1]
     for f in os.listdir(input_dir):
         data = json.load(os.path.join(input_dir, f))
-        batch_name = f.replace('json','')
+        batch_name = f.replace('.json','')
+        print("processing", batch_name)
+        print(data)
         folders.batch_path  = os.path.join(input_path, batch_name)
         pargs.text_prompts ={0: ["{}:1.5".format(data['description']),
          "artstation,deviantart,vray render, unreal engine, hyperrealism, photorealism,volumetric lighting:.3"] + ['style of {}'.format(a) for a in data['artists']]}
