@@ -18,10 +18,18 @@ pargs = dd_args.arg_configuration_loader()
 
 # Setup folders
 #folders = dd.setupFolders(is_colab=dd.detectColab(), PROJECT_DIR=PROJECT_DIR, pargs=pargs)
+ 
+folders = pydot(
+        {
+            "root_path": os.getcwd(),
+            "outDirPath": '/outputs/character-portraits',
+            "model_path": '/outputs/dd-models',
+        }
+    )
 
 # Load Models
-#dd.loadModels(folders)
-#dd.loadModels2(folders)
+dd.loadModels(folders)
+dd.loadModels2(folders)
 
 # Report System Details
 #dd.systemDetails(pargs)
@@ -32,14 +40,6 @@ import uuid
 import os
 from loguru import logger
 if __name__=="__main__":
- 
-    folders = pydot(
-        {
-            "root_path": os.getcwd(),
-            "outDirPath": '/outputs/character-portraits',
-            "model_path": '/outputs/dd-models',
-        }
-    )
 
     pargs.diffusion_model = "portrait_generator_v001"
     pargs.use_secondary_model = False
