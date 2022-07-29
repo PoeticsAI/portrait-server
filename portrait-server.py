@@ -3,7 +3,7 @@ from pydotted import pydot
 
 
 # Import DD helper modules
-sys.path.append('/workspaces/disco-diffusion-1')
+sys.path.append('/workspace/disco-diffusion-1')
 import dd, dd_args
 
 # Unsure about these:
