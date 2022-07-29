@@ -49,7 +49,7 @@ if __name__=="__main__":
         batch_name = f.replace('.json','')
         logger.info("processing", batch_name)
         logger.info(data)
-        folders.batch_path  = os.path.join(input_path, batch_name)
+        folders.batch_folder  = os.path.join(input_path, batch_name)
         pargs.text_prompts ={0: ["{}:1.5".format(data['description']),
          "artstation,deviantart,vray render, unreal engine, hyperrealism, photorealism,volumetric lighting:.3"] + ['style of {}'.format(a) for a in data['artists']]}
    
