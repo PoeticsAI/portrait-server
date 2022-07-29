@@ -1,11 +1,9 @@
 import os, sys
 from pydotted import pydot
 
-# Set base project directory to current working directory
-PROJECT_DIR = os.path.abspath(os.getcwd())
 
 # Import DD helper modules
-sys.path.append(PROJECT_DIR)
+sys.path.append('/workspaces/disco-diffusion-1')
 import dd, dd_args
 
 # Unsure about these:
@@ -18,12 +16,12 @@ pargs = dd_args.arg_configuration_loader()
 
 # Setup folders
 #folders = dd.setupFolders(is_colab=dd.detectColab(), PROJECT_DIR=PROJECT_DIR, pargs=pargs)
- 
+
 folders = pydot(
         {
-            "root_path": os.getcwd(),
+            "root_path": '/outputs/dd-models',
             "outDirPath": '/outputs/character-portraits',
-            "model_path": '/outputs/dd-models',
+            "model_path": '/outputs/dd-models/models',
         }
     )
 
@@ -56,5 +54,5 @@ if __name__=="__main__":
          "artstation,deviantart,vray render, unreal engine, hyperrealism, photorealism,volumetric lighting:.3"] + ['style of {}'.format(a) for a in data['artists']]}
    
         dd.start_run(pargs=pargs, folders=folders, device=device, is_colab=dd.detectColab())
-        logger.info(os.listdir(os.getcwd()))
+        logger.info(os.listdir(os.getcwddd()))
 
